@@ -3,6 +3,12 @@ pipeline {
 
   stages {
 
+    stage('Checkout') {
+      steps {
+        echo "Checkout Stage"
+      }
+    }
+
     stage('Compile Code') {
       steps {
         echo "Compile Stage"
