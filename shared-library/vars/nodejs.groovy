@@ -30,6 +30,18 @@ def call() {
         }
       }
 
+      stage('Code Coverage') {
+        steps {
+          echo 'Hello World'
+        }
+      }
+
+      stage('Release') {
+        steps {
+          echo 'Hello World'
+        }
+      }
+
     }
 
     post {
