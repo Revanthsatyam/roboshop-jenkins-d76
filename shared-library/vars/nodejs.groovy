@@ -9,7 +9,7 @@ def call() {
       nodejs 'nodejs'
     }
 
-    stage {
+    stages {
 
       stage('Checkout') {
         steps {
@@ -19,13 +19,13 @@ def call() {
 
       stage('Compile & Build') {
         steps {
-          sh "npm install"
+          sh 'npm install'
         }
       }
 
       stage('Test') {
         steps {
-          sh "npm test"
+          sh 'npm test'
         }
       }
 
