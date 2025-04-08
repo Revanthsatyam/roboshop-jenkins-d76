@@ -30,7 +30,7 @@ def call() {
         }
       }
 
-      stage('Code Coverage') {
+      stage('SonarQube Analysis') {
         steps {
           withSonarQubeEnv('sonarqube') {
             script {
