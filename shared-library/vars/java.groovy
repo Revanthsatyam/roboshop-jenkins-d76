@@ -34,7 +34,7 @@ def call () {
           withSonarQubeEnv('sonarqube') {
             script {
               def scannerHome = tool 'sonarqube'
-              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${env.component}"
+              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${env.component} -Dsonar.java.binaries=target"
             }
           }
         }
