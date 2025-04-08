@@ -7,7 +7,7 @@ def call() {
 
     tools {
       nodejs 'nodejs'
-      sonarQubeScanner 'sonarqube'
+      sonarqube 'sonarqube'
     }
 
     stages {
