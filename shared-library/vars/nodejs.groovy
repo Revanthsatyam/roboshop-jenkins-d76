@@ -6,7 +6,7 @@ def call() {
     }
 
     tools {
-      nodejs ('nodejs')
+      nodejs 'nodejs'
     }
 
     stages {
