@@ -41,7 +41,7 @@ def call() {
           withSonarQubeEnv('sonarqube') {
             script {
               def scannerHome = tool 'sonarqube'
-              sh "${scannerHome}/bin/sonar-scanner"
+              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=catalogue"
             }
           }
         }
