@@ -63,7 +63,7 @@ def call() {
             sh '''
                         curl -u $nexus_user:$nexus_pass \
                         --upload-file catalogue.zip \
-                        http://nexus.rsdevops.in/repository/catalogue/catalogue.zip
+                        http://nexus.rsdevops.in/repository/catalogue/catalogue-${env.BUILD_NUMBER}.zip
                     '''
           }
         }
