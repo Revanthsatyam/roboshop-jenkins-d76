@@ -58,7 +58,7 @@ def call() {
 
       stage('Release') {
         steps {
-          sh "zip -r ${env.component}.zip node_modules package.json server.js schema"
+          sh "zip -r ${env.component}.zip node_modules server.js schema"
           withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'nexus_pass', usernameVariable: 'nexus_user')]) {
             sh """
                         curl -u $nexus_user:$nexus_pass \
