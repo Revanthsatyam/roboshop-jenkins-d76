@@ -38,7 +38,9 @@ def call() {
 
       stage('Code Security') {
         steps {
-          echo 'Hello World'
+          withSonarQubeEnv('sonarqube') {
+            sh 'sonar-scanner'
+          }
         }
       }
 
