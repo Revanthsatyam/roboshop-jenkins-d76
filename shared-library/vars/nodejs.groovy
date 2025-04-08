@@ -39,8 +39,10 @@ def call() {
       stage('Code Security') {
         steps {
           withSonarQubeEnv('sonarqube') {
-            def scannerHome = tool 'sonarqube'
-            sh "${scannerHome}/bin/sonar-scanner"
+            script {
+              def scannerHome = tool 'sonarqube'
+              sh "${scannerHome}/bin/sonar-scanner"
+            }
           }
         }
       }
