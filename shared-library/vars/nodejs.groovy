@@ -36,6 +36,12 @@ def call() {
         }
       }
 
+      stage('Code Security') {
+        steps {
+          echo 'Hello World'
+        }
+      }
+
       stage('Release') {
         steps {
           echo 'Hello World'
