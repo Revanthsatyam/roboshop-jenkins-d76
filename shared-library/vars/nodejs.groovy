@@ -60,11 +60,11 @@ def call() {
         steps {
           sh 'zip -r catalogue.zip node_modules package.json server.js schema'
           withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'nexus_pass', usernameVariable: 'nexus_user')]) {
-            sh '''
+            sh """
                         curl -u $nexus_user:$nexus_pass \
                         --upload-file catalogue.zip \
-                        http://nexus.rsdevops.in/repository/catalogue/"catalogue-${env.BUILD_NUMBER}".zip
-                    '''
+                        http://nexus.rsdevops.in/repository/catalogue/catalogue-${env.BUILD_NUMBER}.zip
+                    """
           }
         }
       }
