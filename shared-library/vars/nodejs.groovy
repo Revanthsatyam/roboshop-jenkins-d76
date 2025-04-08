@@ -39,6 +39,7 @@ def call() {
       stage('Code Security') {
         steps {
           withSonarQubeEnv('sonarqube') {
+            tool 'sonarqube'
             sh 'sonar-scanner'
           }
         }
