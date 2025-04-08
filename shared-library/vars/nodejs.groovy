@@ -32,18 +32,18 @@ def call() {
 
       stage('Code Coverage') {
         steps {
-          echo 'Hello World'
-        }
-      }
-
-      stage('Code Security') {
-        steps {
           withSonarQubeEnv('sonarqube') {
             script {
               def scannerHome = tool 'sonarqube'
               sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=catalogue"
             }
           }
+        }
+      }
+
+      stage('Code Security') {
+        steps {
+          echo 'Hello World'
         }
       }
 
