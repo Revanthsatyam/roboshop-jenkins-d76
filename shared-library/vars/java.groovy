@@ -57,7 +57,7 @@ def call () {
 
       stage ('Release') {
         steps {
-          sh "mv target/shipping-1.0.jar shipping.jar; zip -r ${env.component} ${env.component}.jar schema"
+          sh "mv target/shipping-1.0.jar shipping.jar; zip -r ${env.component}.zip ${env.component}.jar schema"
           withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'nexus_pass', usernameVariable: 'nexus_user')]) {
             sh """
                         curl -u $nexus_user:$nexus_pass \
