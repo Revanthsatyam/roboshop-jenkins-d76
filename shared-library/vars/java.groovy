@@ -29,6 +29,17 @@ def call () {
         }
       }
 
+      stage ('SonarQube Analysis') {
+        steps {
+          withSonarQubeEnv('sonarqube') {
+            script {
+              def scannerHome = tool 'sonarqube'
+              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${env.component}"
+            }
+          }
+        }
+      }
+
     }
 
     post {
