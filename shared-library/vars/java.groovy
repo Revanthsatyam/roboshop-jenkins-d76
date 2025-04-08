@@ -17,6 +17,12 @@ def call () {
         }
       }
 
+      stage ('Compile & Build') {
+        steps {
+          sh 'mvn clean package'
+        }
+      }
+
     }
 
   }
