@@ -49,6 +49,12 @@ def call () {
         }
       }
 
+      stage ('Code Security') {
+        steps {
+          echo 'Code Secured'
+        }
+      }
+
     }
 
     post {

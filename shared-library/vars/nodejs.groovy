@@ -52,7 +52,7 @@ def call() {
 
       stage('Code Security') {
         steps {
-          echo 'Hello World'
+          echo 'Code Secured'
         }
       }
 
