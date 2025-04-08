@@ -13,7 +13,7 @@ def call() {
 
       stage('Checkout') {
         steps {
-          git branch: 'main', url: 'https://github.com/Revanthsatyam/catalogue.git'
+          git branch: 'main', url: "https://github.com/Revanthsatyam/${env.component}.git"
         }
       }
 
