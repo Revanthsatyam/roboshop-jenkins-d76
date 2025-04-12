@@ -2,6 +2,10 @@ def call() {
   pipeline {
     agent { label 'workstation' }
 
+    options {
+      ansiColor('xterm')
+    }
+
     stages {
 
       stage('Checkout') {
