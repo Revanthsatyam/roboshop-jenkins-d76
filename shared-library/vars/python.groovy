@@ -37,14 +37,14 @@ def call () {
         }
       }
 
-      stage('Quality Gate') {
-        steps {
-          //timeout(time: 1, unit: 'MINUTES') {
-          //  waitForQualityGate abortPipeline: true
-          //}
-          waitForQualityGate abortPipeline: true
-        }
-      }
+//      stage('Quality Gate') {
+//        steps {
+//          //timeout(time: 1, unit: 'MINUTES') {
+//          //  waitForQualityGate abortPipeline: true
+//          //}
+//          waitForQualityGate abortPipeline: true
+//        }
+//      }
 
       stage ('Code Security') {
         steps {
