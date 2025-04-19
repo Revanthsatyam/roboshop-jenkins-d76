@@ -55,16 +55,31 @@ def call () {
         }
       }
 
-      stage ('Release') {
+//      stage ('Release') {
+//        steps {
+//          sh "mv target/shipping-1.0.jar shipping.jar; zip -r ${env.component}.zip ${env.component}.jar schema"
+//          withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'nexus_pass', usernameVariable: 'nexus_user')]) {
+//            sh """
+//                        curl -u $nexus_user:$nexus_pass \
+//                        --upload-file ${env.component}.zip \
+//                        http://nexus.rsdevops.in/repository/${env.component}/${env.component}-${env.BUILD_NUMBER}.zip
+//                    """
+//          }
+//        }
+//      }
+
+      stage('Build Image') {
         steps {
-          sh "mv target/shipping-1.0.jar shipping.jar; zip -r ${env.component}.zip ${env.component}.jar schema"
-          withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'nexus_pass', usernameVariable: 'nexus_user')]) {
-            sh """
-                        curl -u $nexus_user:$nexus_pass \
-                        --upload-file ${env.component}.zip \
-                        http://nexus.rsdevops.in/repository/${env.component}/${env.component}-${env.BUILD_NUMBER}.zip
-                    """
-          }
+          sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 058264090525.dkr.ecr.us-east-1.amazonaws.com"
+          //sh "docker build -t ${env.component} ."
+          sh "docker build -t 058264090525.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.BUILD_NUMBER} ."
+          //sh "docker tag ${env.component}:${env.BUILD_NUMBER} 058264090525.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.BUILD_NUMBER}"
+        }
+      }
+
+      stage('Image Push To ECR') {
+        steps {
+          sh "docker push 058264090525.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.BUILD_NUMBER}"
         }
       }
 
