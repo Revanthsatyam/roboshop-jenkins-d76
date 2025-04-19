@@ -26,25 +26,25 @@ def call () {
         }
       }
 
-//      stage ('SonarQube Analysis') {
-//        steps {
-//          withSonarQubeEnv('sonarqube') {
-//            script {
-//              def scannerHome = tool 'sonarqube'
-//              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${env.component}"
-//            }
-//          }
-//        }
-//      }
-
-      stage('Quality Gate') {
+      stage ('SonarQube Analysis') {
         steps {
-          //timeout(time: 1, unit: 'MINUTES') {
-          //  waitForQualityGate abortPipeline: true
-          //}
-          waitForQualityGate abortPipeline: true
+          withSonarQubeEnv('sonarqube') {
+            script {
+              def scannerHome = tool 'sonarqube'
+              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${env.component}"
+            }
+          }
         }
       }
+
+//      stage('Quality Gate') {
+//        steps {
+//          //timeout(time: 1, unit: 'MINUTES') {
+//          //  waitForQualityGate abortPipeline: true
+//          //}
+//          waitForQualityGate abortPipeline: true
+//        }
+//      }
 
       stage ('Code Security') {
         steps {
