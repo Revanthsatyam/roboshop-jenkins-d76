@@ -70,13 +70,17 @@ def call() {
 //      }
 
       stage('Build Image') {
-        sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 058264090525.dkr.ecr.us-east-1.amazonaws.com"
-        sh "docker build -t ${env.component} ."
-        sh "docker tag ${env.component}:${env.BUILD_NUMBER} 058264090525.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.BUILD_NUMBER}"
+        steps {
+          sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 058264090525.dkr.ecr.us-east-1.amazonaws.com"
+          sh "docker build -t ${env.component} ."
+          sh "docker tag ${env.component}:${env.BUILD_NUMBER} 058264090525.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.BUILD_NUMBER}"
+        }
       }
 
       stage('Image Push To ECR') {
-        sh "docker push 058264090525.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.BUILD_NUMBER}"
+        steps {
+          sh "docker push 058264090525.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.BUILD_NUMBER}"
+        }
       }
 
     }
