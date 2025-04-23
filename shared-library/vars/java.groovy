@@ -94,17 +94,17 @@ def call () {
 
             if (branch == 'main') {
               env.env = 'prod'
+            } else if (branch == 'stage') {
+              env.env = 'stage'  // Or any environment for 'develop' branch
             } else {
-              env.env = 'stage'
+              env.env = ''  // Default case for other branches
             }
 
-            build job: 'helm_deploy',
-              wait: true,
-              parameters: [
-                string(name: 'env', value: env.env),
-                string(name: 'component', value: env.component),
-                string(name: 'tag', value: env.BUILD_NUMBER)
-              ]
+            roboshop_helm_deploy(
+              env: env.env,
+              component: env.component,
+              tag: env.BUILD_NUMBER
+            )
           }
         }
       }
