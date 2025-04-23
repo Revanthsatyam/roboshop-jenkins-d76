@@ -80,6 +80,32 @@ def call () {
         }
       }
 
+      stage('Trigger Deployment Pipeline') {
+        when {
+          expression { currentBuild.currentResult == 'SUCCESS' }
+        }
+        steps {
+          script {
+            def branch = env.BRANCH_NAME
+            echo "Branch is: ${branch}"
+
+            if (branch == 'main') {
+              env.env = 'prod'
+            } else if (branch == 'stage') {
+              env.env = 'stage'  // Or any environment for 'develop' branch
+            } else {
+              env.env = ''  // Default case for other branches
+            }
+
+            roboshop_helm_deploy(
+              env: env.env,
+              component: env.component,
+              tag: env.BUILD_NUMBER
+            )
+          }
+        }
+      }
+
     }
 
     post {
