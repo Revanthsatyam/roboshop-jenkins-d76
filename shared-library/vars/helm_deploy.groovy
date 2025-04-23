@@ -1,4 +1,4 @@
-def call(Map args = [:]) {
+def call() {
   pipeline {
     agent {
       label 'workstation'
