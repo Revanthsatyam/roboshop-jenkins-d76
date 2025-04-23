@@ -95,10 +95,11 @@ def call () {
               env.env = 'stage'
             }
 
-            helm_deploy.call(
+            helm_deploy.call([
               env: env.env,
               component: env.component,
               tag: env.BUILD_NUMBER
+              ]
             )
 
 //            build job: 'helm_deploy',
