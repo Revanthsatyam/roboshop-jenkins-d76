@@ -83,6 +83,32 @@ def call () {
         }
       }
 
+      stage('Trigger Deployment Pipeline') {
+        when {
+          expression { currentBuild.currentResult == 'SUCCESS' }
+        }
+        steps {
+          script {
+            def branch = env.BRANCH_NAME
+            echo "Branch is: ${branch}"
+
+            if (branch == 'main') {
+              env.env = 'prod'
+            } else {
+              env.env = 'stage'
+            }
+
+            build job: 'helm_deploy',
+              wait: true,
+              parameters: [
+                string(name: 'env', value: env.env),
+                string(name: 'component', value: env.component),
+                string(name: 'tag', value: env.BUILD_NUMBER)
+              ]
+          }
+        }
+      }
+
     }
 
     post {
