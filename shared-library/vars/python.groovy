@@ -95,7 +95,7 @@ def call () {
               env.env = 'stage'
             }
 
-            helm_deploy(
+            roboshop_helm_deploy(
               env: env.env,
               component: env.component,
               tag: env.BUILD_NUMBER
