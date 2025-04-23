@@ -95,13 +95,19 @@ def call () {
               env.env = 'stage'
             }
 
-            build job: 'helm_deploy',
-              wait: true,
-              parameters: [
-                string(name: 'env', value: env.env),
-                string(name: 'component', value: env.component),
-                string(name: 'tag', value: env.BUILD_NUMBER)
-              ]
+            helm_deploy(
+              env: env.env,
+              component: env.component,
+              tag: env.BUILD_NUMBER
+            )
+
+//            build job: 'helm_deploy',
+//              wait: true,
+//              parameters: [
+//                string(name: 'env', value: env.env),
+//                string(name: 'component', value: env.component),
+//                string(name: 'tag', value: env.BUILD_NUMBER)
+//              ]
           }
         }
       }
