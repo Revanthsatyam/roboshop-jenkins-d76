@@ -15,7 +15,12 @@ def call(Map args = [:]) {
   // Get APP Code
   echo "Cloning APP and CHART repositories"
   dir('APP') {
-    git branch: 'main', url: "https://github.com/Revanthsatyam/${component}"
+    if (env == 'prod') {
+      git branch: 'main', url: "https://github.com/Revanthsatyam/${component}"
+    }
+    if (env == 'stage') {
+      git branch: 'stage', url: "https://github.com/Revanthsatyam/${component}"
+    }
   }
   dir('CHART') {
     git branch: 'main', url: 'https://github.com/Revanthsatyam/roboshop-helm-d76'
