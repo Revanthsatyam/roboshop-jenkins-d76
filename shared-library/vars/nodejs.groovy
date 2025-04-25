@@ -112,11 +112,19 @@ def call() {
               env.env = ''  // Default case for other branches
             }
 
-            roboshop_helm_deploy(
-              env: env.env,
-              component: env.component,
-              tag: env.BUILD_NUMBER
-            )
+            if (env.BRANCH_NAME == 'main') {
+              roboshop_helm_deploy(
+                env: env.env,
+                component: env.component,
+                tag: env.BUILD_NUMBER
+              )
+            } else if (env.BRANCH_NAME == 'stage') {
+              roboshop_helm_deploy(
+                env: env.env,
+                component: "${env.component}-stage",
+                tag: env.BUILD_NUMBER
+              )
+            }
           }
         }
       }
